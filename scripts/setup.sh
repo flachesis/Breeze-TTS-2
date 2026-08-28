@@ -35,7 +35,6 @@ uv pip install --python "${VENV_PY}" \
   --index-url https://pypi.org/simple \
   --extra-index-url "${AMD_TORCH_INDEX}" \
   --index-strategy unsafe-best-match \
-  --upgrade-strategy only-if-needed \
   -c "${BREEZE_ROOT}/constraints-rocm.txt" \
   -r "${BREEZE_ROOT}/requirements-rocm.txt"
 
