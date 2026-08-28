@@ -14,3 +14,4 @@ export AMD_TORCH_INDEX="${AMD_TORCH_INDEX:-https://repo.amd.com/rocm/whl-multi-a
 export AMD_TORCH="${AMD_TORCH:-torch[device-gfx1151]==2.12.0+rocm7.14.0}"
 export AMD_TORCHVISION="${AMD_TORCHVISION:-torchvision[device-gfx1151]==0.27.0+rocm7.14.0}"
 export AMD_TORCHAUDIO="${AMD_TORCHAUDIO:-torchaudio==2.11.0+rocm7.14.0}"
+export UV_PYTHON="${UV_PYTHON:-${PYTHON:-3.12}}"
