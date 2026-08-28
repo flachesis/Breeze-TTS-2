@@ -1,0 +1,39 @@
+--- a/models/breeze.py
++++ b/models/breeze.py
+@@ -17,6 +17,7 @@
+ 
+ from __future__ import annotations
+ 
++import importlib.util
+ from collections.abc import Callable
+ 
+ from dataclasses import dataclass
+@@ -52,6 +53,13 @@
+ logger = logging.get_logger(__name__)
+ 
+ 
++def _flash_attn_2_available() -> bool:
++    if not torch.cuda.is_available():
++        return False
++    return importlib.util.find_spec("flash_attn") is not None
++
++
+ @dataclass
+ @auto_docstring(
+     custom_intro="""
+@@ -974,6 +982,16 @@ def __init__(self, config):
+             )
+             if text_encoder_attn_implementation is None:
+                 text_encoder_attn_implementation = "flash_attention_2"
++            if (
++                text_encoder_attn_implementation == "flash_attention_2"
++                and not _flash_attn_2_available()
++            ):
++                logger.warning(
++                    "flash_attn is unavailable; the text encoder falls back to "
++                    "the eager attention kernel."
++                )
++                text_encoder_attn_implementation = "eager"
+             config.text_encoder_config._attn_implementation = (
+                 text_encoder_attn_implementation
+             )

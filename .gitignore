@@ -1,0 +1,8 @@
+.venv/
+checkpoints/
+breeze-tts/
+outputs/
+__pycache__/
+*.pyc
+*.wav
+*.pcm
